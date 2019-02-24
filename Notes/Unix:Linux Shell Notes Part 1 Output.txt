@@ -1,0 +1,227 @@
+#pwd = print working directory
+#ls = lists files
+#ls - F = lists files with flags
+#ls -a =lists hidden files as well
+#touch filename = creates filename
+#cp filename filename2 = creates a copy of filename named filename2
+#cp filename file_location = creates a copy of filename in file_location
+#cd .. = goes back one directory
+#rm filename = removes filename
+
+#display contents of file Uruguay.txt
+Citadels-MacBook-Pro:ByCountry bproni$ cat Uruguay.txt 
+country	continent	year	lifeExp	pop	gdpPercap
+Uruguay	Americas	1977	69.481	2873520	6504.339663
+Uruguay	Americas	1967	68.468	2748579	5444.61962
+Uruguay	Americas	1957	67.044	2424959	6150.772969
+Uruguay	Americas	1962	68.253	2598466	5603.357717
+Uruguay	Americas	1972	68.673	2829526	5703.408898
+Uruguay	Americas	2002	75.307	3363085	7727.002004
+Uruguay	Americas	1982	70.805	2953997	6920.223051
+Uruguay	Americas	1992	72.752	3149262	8137.004775
+Uruguay	Americas	1997	74.223	3262838	9230.240708
+Uruguay	Americas	2007	76.384	3447496	10611.46299
+Uruguay	Americas	1952	66.071	2252965	5716.766744
+Uruguay	Americas	1987	71.918	3045153	7452.398969
+
+#display the first five lines
+Citadels-MacBook-Pro:ByCountry bproni$ head -n5 Uruguay.txt 
+country	continent	year	lifeExp	pop	gdpPercap
+Uruguay	Americas	1977	69.481	2873520	6504.339663
+Uruguay	Americas	1967	68.468	2748579	5444.61962
+Uruguay	Americas	1957	67.044	2424959	6150.772969
+Uruguay	Americas	1962	68.253	2598466	5603.357717
+
+#display number of lines (13) number of words (78) and number of bytes (632)
+Citadels-MacBook-Pro:ByCountry bproni$ wc Uruguay.txt 
+      13      78     632 Uruguay.txt
+
+#display number of lines in file
+Citadels-MacBook-Pro:ByCountry bproni$ wc -l Uruguay.txt 
+      13 Uruguay.txt
+
+#use grep to select lines that contain the word 'Uruguay'
+Citadels-MacBook-Pro:ByCountry bproni$ grep 'Uruguay' Uruguay.txt 
+Uruguay	Americas	1977	69.481	2873520	6504.339663
+Uruguay	Americas	1967	68.468	2748579	5444.61962
+Uruguay	Americas	1957	67.044	2424959	6150.772969
+Uruguay	Americas	1962	68.253	2598466	5603.357717
+Uruguay	Americas	1972	68.673	2829526	5703.408898
+Uruguay	Americas	2002	75.307	3363085	7727.002004
+Uruguay	Americas	1982	70.805	2953997	6920.223051
+Uruguay	Americas	1992	72.752	3149262	8137.004775
+Uruguay	Americas	1997	74.223	3262838	9230.240708
+Uruguay	Americas	2007	76.384	3447496	10611.46299
+Uruguay	Americas	1952	66.071	2252965	5716.766744
+Uruguay	Americas	1987	71.918	3045153	7452.398969
+
+#use grep to select lines that do not contain the word 'country' (which is in our header)
+Citadels-MacBook-Pro:ByCountry bproni$ grep -v 'country' Uruguay.txt 
+Uruguay	Americas	1977	69.481	2873520	6504.339663
+Uruguay	Americas	1967	68.468	2748579	5444.61962
+Uruguay	Americas	1957	67.044	2424959	6150.772969
+Uruguay	Americas	1962	68.253	2598466	5603.357717
+Uruguay	Americas	1972	68.673	2829526	5703.408898
+Uruguay	Americas	2002	75.307	3363085	7727.002004
+Uruguay	Americas	1982	70.805	2953997	6920.223051
+Uruguay	Americas	1992	72.752	3149262	8137.004775
+Uruguay	Americas	1997	74.223	3262838	9230.240708
+Uruguay	Americas	2007	76.384	3447496	10611.46299
+Uruguay	Americas	1952	66.071	2252965	5716.766744
+Uruguay	Americas	1987	71.918	3045153	7452.398969
+
+#save result in a new file Uruguay_noHeader.txt
+Citadels-MacBook-Pro:ByCountry bproni$ grep -v 'country' Uruguay.txt > Uruguay_noHeader.txt
+
+#get 4th column for life expectancy
+Citadels-MacBook-Pro:ByCountry bproni$ cut -f4 Uruguay_noHeader.txt 
+69.481
+68.468
+67.044
+68.253
+68.673
+75.307
+70.805
+72.752
+74.223
+76.384
+66.071
+71.918
+
+#save result in a new file Uruguay_lifeExpectancy.txt
+Citadels-MacBook-Pro:ByCountry bproni$ cut -f4 Uruguay_noHeader.txt > Uruguay_lifeExpectancy.txt
+
+#sort the output numerically and write it to a new file
+Citadels-MacBook-Pro:ByCountry bproni$ sort Uruguay_lifeExpectancy.txt > Uruguay_lifeExpectancy_sorted.txt
+Citadels-MacBook-Pro:ByCountry bproni$ cat Uruguay_lifeExpectancy_sorted.txt 
+66.071
+67.044
+68.253
+68.468
+68.673
+69.481
+70.805
+71.918
+72.752
+74.223
+75.307
+76.384
+
+#save the last line in a new file Ururguay_lifeExpectancy_max.txt
+Citadels-MacBook-Pro:ByCountry bproni$ tail -n1 Uruguay_lifeExpectancy_sorted.txt > Uruguay_lifeExpectancy_max.txt
+Citadels-MacBook-Pro:ByCountry bproni$ cat Uruguay_lifeExpectancy_max.txt 
+76.384
+
+#sorts the fourth column (-k4) numerically (-n)
+Citadels-MacBook-Pro:ByCountry bproni$ sort -n -k4 Uruguay_copy.txt
+country	continent	year	lifeExp	pop	gdpPercap
+Uruguay	Americas	1952	66.071	2252965	5716.766744
+Uruguay	Americas	1957	67.044	2424959	6150.772969
+Uruguay	Americas	1962	68.253	2598466	5603.357717
+Uruguay	Americas	1967	68.468	2748579	5444.61962
+Uruguay	Americas	1972	68.673	2829526	5703.408898
+Uruguay	Americas	1977	69.481	2873520	6504.339663
+Uruguay	Americas	1982	70.805	2953997	6920.223051
+Uruguay	Americas	1987	71.918	3045153	7452.398969
+Uruguay	Americas	1992	72.752	3149262	8137.004775
+Uruguay	Americas	1997	74.223	3262838	9230.240708
+Uruguay	Americas	2002	75.307	3363085	7727.002004
+Uruguay	Americas	2007	76.384	3447496	10611.46299
+
+#pipes help to use output of one command as an input of the next command
+#vertical line | means use the output of last command as input of next command
+Citadels-MacBook-Pro:ByCountry bproni$ grep 'Uruguay' Uruguay.txt | cut -f4 | sort -n| tail -n1 > Uruguay_lifeExpectancy_max2.txt
+Citadels-MacBook-Pro:ByCountry bproni$ cat Uruguay_lifeExpectancy_max2.txt
+76.384
+
+#the same for Sweden
+Citadels-MacBook-Pro:ByCountry bproni$ grep -v 'country' Sweden.txt > Sweden_noHeader.txt
+Citadels-MacBook-Pro:ByCountry bproni$ cut -f4 Sweden_noHeader.txt > Sweden_lifeExpectancy.txt
+Citadels-MacBook-Pro:ByCountry bproni$ sort Sweden_lifeExpectancy.txt > Sweden_lifeExpectancy_sorted.txt
+Citadels-MacBook-Pro:ByCountry bproni$ tail -n1 Sweden_lifeExpectancy_sorted.txt > Sweden_lifeExpectancy_max.tx
+Citadels-MacBook-Pro:ByCountry bproni$ tail -n1 Sweden_lifeExpectancy_sorted.txt > Sweden_lifeExpectancy_max.txt
+
+#Finding the year with the highest life expectancy in Sweden.txt and recording the result to Sweden_YearWithMaxLE.txt
+Citadels-MacBook-Pro:SWC_spring2019 bproni$ cp Data/ByCountry/Sweden.txt unix_shell/
+Citadels-MacBook-Pro:SWC_spring2019 bproni$ cd unix_shell/
+Citadels-MacBook-Pro:unix_shell bproni$ grep 'Sweden' Sweden.txt | cut -f3,4 |sort -n -k2 | tail -n1 | cut -f1 > Sweden_YearWithMaxLE.txt
+Citadels-MacBook-Pro:unix_shell bproni$ cat Sweden_YearWithMaxLE.txt 
+2007
+Citadels-MacBook-Pro:unix_shell bproni$ 
+
+#working with multiple files
+# * = wild card
+#files that start with U and can contain any character after that
+Citadels-MacBook-Pro:ByCountry bproni$ ls U*
+Uganda.txt				Uruguay_lifeExpectancy.txt
+United_Kingdom.txt			Uruguay_lifeExpectancy_max.txt
+United_States.txt			Uruguay_lifeExpectancy_max2.txt
+Uruguay.txt				Uruguay_lifeExpectancy_sorted.txt
+Uruguay_copy.txt			Uruguay_noHeader.txt
+
+#count all lines in all text files that start with the letter G
+Citadels-MacBook-Pro:ByCountry bproni$ wc -l G*.txt
+      13 Gabon.txt
+      13 Gambia.txt
+      13 Germany.txt
+      13 Ghana.txt
+      13 Greece.txt
+      13 Guatemala.txt
+      13 Guinea-Bissau.txt
+      13 Guinea.txt
+     104 total
+
+#Loops part 1- variables in bash
+Citadels-MacBook-Pro:ByCountry bproni$ myName=Rebecca
+#call the value of the variable using $
+Citadels-MacBook-Pro:ByCountry bproni$ echo $myName
+Rebecca
+#general syntax of loop
+#for variable in file1 file2 file3; do command $variable; done
+#example of our first loop (echos names of files)
+Citadels-MacBook-Pro:ByCountry bproni$ for file in Zambia.txt Zimbabwe.txt; do echo $file; done
+Zambia.txt
+Zimbabwe.txt
+Citadels-MacBook-Pro:ByCountry bproni$ for file in Z*.txt; do echo $file; done
+Zambia.txt
+Zimbabwe.txt
+
+Citadels-MacBook-Pro:ByCountry bproni$ for datafile in G*.txt; do ls G*.txt; done
+Gabon.txt		Ghana.txt		Guinea-Bissau.txt
+Gambia.txt		Greece.txt		Guinea.txt
+Germany.txt		Guatemala.txt
+Gabon.txt		Ghana.txt		Guinea-Bissau.txt
+Gambia.txt		Greece.txt		Guinea.txt
+Germany.txt		Guatemala.txt
+Gabon.txt		Ghana.txt		Guinea-Bissau.txt
+Gambia.txt		Greece.txt		Guinea.txt
+Germany.txt		Guatemala.txt
+Gabon.txt		Ghana.txt		Guinea-Bissau.txt
+Gambia.txt		Greece.txt		Guinea.txt
+Germany.txt		Guatemala.txt
+Gabon.txt		Ghana.txt		Guinea-Bissau.txt
+Gambia.txt		Greece.txt		Guinea.txt
+Germany.txt		Guatemala.txt
+Gabon.txt		Ghana.txt		Guinea-Bissau.txt
+Gambia.txt		Greece.txt		Guinea.txt
+Germany.txt		Guatemala.txt
+Gabon.txt		Ghana.txt		Guinea-Bissau.txt
+Gambia.txt		Greece.txt		Guinea.txt
+Germany.txt		Guatemala.txt
+Gabon.txt		Ghana.txt		Guinea-Bissau.txt
+Gambia.txt		Greece.txt		Guinea.txt
+Germany.txt		Guatemala.txt
+Citadels-MacBook-Pro:ByCountry bproni$ for datafile in G*.txt; do ls $datafile; done
+Gabon.txt
+Gambia.txt
+Germany.txt
+Ghana.txt
+Greece.txt
+Guatemala.txt
+Guinea-Bissau.txt
+Guinea.txt
+
+#writing bash shell scripts
+Citadels-MacBook-Pro:unix_shell bproni$ ./FirstScript.sh
+-bash: ./FirstScript.sh: Permission denied
+Citadels-MacBook-Pro:unix_shell bproni$ chmod +x FirstScript.sh
